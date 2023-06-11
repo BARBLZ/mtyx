@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/acl/index")
-@Api("登录接口")
+@Api(tags = "登录接口")
 @CrossOrigin     //解决跨域问题
 // 跨域问题：前后端访问的协议（http）或ip地址或端口号不一致导致
 public class IndexController {
