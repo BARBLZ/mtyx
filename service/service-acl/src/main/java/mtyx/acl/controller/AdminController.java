@@ -43,7 +43,7 @@ public class AdminController {
     @ApiOperation("用户修改")
     @PutMapping("update")
     public Result update(@RequestBody Admin admin) {
-        boolean is_success = adminService.update(admin, null);
+        boolean is_success = adminService.updateById(admin);
         return is_success ? Result.ok(null) : Result.fail(null);
     }
     // 根据id删除
