@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Api(tags = "用户管理接口")
+@Api(tags = "角色管理接口")
 @RequestMapping("/admin/acl/role")
 @CrossOrigin
 public class RoleController {
