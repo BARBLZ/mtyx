@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import mtyx.acl.service.AdminService;
+import mtyx.acl.service.RoleService;
 import mtyx.model.acl.Admin;
 import mtyx.result.Result;
 import mtyx.vo.acl.AdminQueryVo;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "用户接口")
 @RestController
@@ -20,6 +22,9 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private RoleService roleService;
 
     // 用户列表
     @ApiOperation("用户列表")
@@ -60,5 +65,22 @@ public class AdminController {
         boolean is_success = adminService.removeByIds(idList);
         return is_success ? Result.ok(null) : Result.fail(null);
     }
+
+    // 获取某个用户的所有角色
+    @ApiOperation("获取用户角色")
+    @GetMapping("toAssign/{adminId}")
+    public Result getRoles(@PathVariable Long adminId) {
+        Map<String, Object> map = roleService.selectRolesByAdminId(adminId);
+        return Result.ok(map);
+    }
+
     // 为用户分配角色
+    @ApiOperation("为用户分配角色")
+    @PostMapping("doAssign")
+    public Result doAssign(@RequestParam Long adminId,
+                           @RequestParam Long[] roleId) {
+        roleService.saveAdminRole(adminId, roleId);
+        return Result.ok(null);
+    }
+
 }
