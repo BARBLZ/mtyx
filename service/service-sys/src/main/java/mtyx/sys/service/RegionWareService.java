@@ -20,4 +20,7 @@ public interface RegionWareService extends IService<RegionWare> {
 
     // 添加开通区域
     void saveRegionWare(RegionWare regionWare);
+
+    // 取消开通区域
+    void updateStatus(Long id, Integer status);
 }

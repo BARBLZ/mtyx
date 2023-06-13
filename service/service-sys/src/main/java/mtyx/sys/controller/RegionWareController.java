@@ -49,5 +49,21 @@ public class RegionWareController {
         return Result.ok(null);
     }
 
+    //删除开通区域
+    @ApiOperation("删除开通区域")
+    @DeleteMapping("remove/{id}")
+    public Result remove(@PathVariable Long id) {
+        regionWareService.removeById(id);
+        return Result.ok(null);
+    }
+
+    // 取消开通区域
+    @ApiOperation(value = "取消开通区域")
+    @PostMapping("updateStatus/{id}/{status}")
+    public Result updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+        regionWareService.updateStatus(id, status);
+        return Result.ok(null);
+    }
+
 }
 
