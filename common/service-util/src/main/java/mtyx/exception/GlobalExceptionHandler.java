@@ -20,6 +20,6 @@ public class GlobalExceptionHandler {
     @ResponseBody  // 将返回值以json数据返回
     public Result error (MtyxException e) {
         e.printStackTrace();
-        return Result.fail(null);
+        return Result.build(null, e.getCode(), e.getMessage());
     }
 }
